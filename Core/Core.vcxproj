@@ -19,7 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SkinCalibratior.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="VideoDispatcher.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SkinCalibrator.h" />
+    <ClInclude Include="VideoDispatcher.h" />
+    <ClInclude Include="VideoDispatcherState.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{80b3a622-ac4a-44d0-bebd-18225555676b}</ProjectGuid>
