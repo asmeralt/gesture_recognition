@@ -4,8 +4,17 @@
 #include <opencv2\videoio.hpp>
 #include <opencv2\imgproc.hpp>
 
-VideoDispatcher::VideoDispatcher(std::string windowName, int frameCaptureDelayMillis):windowName(windowName), frameCaptureDelayMillis(frameCaptureDelayMillis) {
-	this->state = VD_CALIBRATION;
+// public
+VideoDispatcher::VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, CalibrationStateExecutor& calibrationStateExecutor) :
+	windowName(windowName),
+	frameCaptureDelayMillis(frameCaptureDelayMillis),
+	state(VD_CALIBRATION),
+	calibration(calibrationStateExecutor)
+{
+}
+
+VideoDispatcher::~VideoDispatcher()
+{
 }
 
 void VideoDispatcher::run() {
@@ -26,29 +35,35 @@ void VideoDispatcher::run() {
 		}
 
 		switch (state) {
-		case VD_CALIBRATION: calibration(frame); break;
-		case VD_RECOGNITION: recognition(frame); break;
-		case VD_EXIT: return;
-		default: throw std::exception("Ooops, given dispatcher state %i is not implemented yet");
+			case VD_CALIBRATION: calibration.execute(frame); recognition(frame); break;
+			case VD_RECOGNITION: recognition(frame); break;
+			case VD_EXIT: return;
+			default: throw std::exception("Ooops, given dispatcher state %i is not implemented yet");
 		}
 
 		cv::imshow(windowName, frame); // display resulted frame
-	
-		// Break while loop when Esc is pressed
-		if (cv::waitKey(frameCaptureDelayMillis) == 27) {
-			state = VD_EXIT;
+
+		// Break "while loop" when Esc is pressed, start calibration when 'c' is pressed, begin recognition when 'r' is pressed
+		switch (cv::waitKey(frameCaptureDelayMillis)) {
+			case 27: state = VD_EXIT; break; // Esc key code is 27
+			case 'c': state = VD_CALIBRATION; break;
+			case 'r': state = VD_RECOGNITION; break;
+			default: break;
 		}
 	}
 }
 
-void VideoDispatcher::calibration(cv::Mat& frame) {
-	
-}
-
+// private
 void VideoDispatcher::recognition(cv::Mat& frame) {
-
-}
-
-VideoDispatcher::~VideoDispatcher()
-{
+	cv::Mat mask;
+	cv::Mat blurredFrame;
+	cv::cvtColor(frame, frame, cv::COLOR_BGR2YCrCb);
+	cv::medianBlur(frame, blurredFrame, 3);
+	std::vector<cv::Scalar>& skinColorFilterRange = this->calibration.getSkinColorFilterRange();
+	cv::inRange(blurredFrame, skinColorFilterRange[0], skinColorFilterRange[1], mask);
+	cv::morphologyEx(mask, mask, cv::MORPH_CLOSE, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(5, 5)), cv::Point(-1, -1), 3);
+	//cv::morphologyEx(mask, mask, cv::MORPH_OPEN, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3)), cv::Point(-1, -1), 3);
+	//cv::morphologyEx(mask, mask, cv::MORPH_CLOSE, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(15, 15)));
+	cv::cvtColor(frame, frame, cv::COLOR_YCrCb2BGR);
+	imshow("Mask", mask);
 }

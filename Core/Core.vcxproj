@@ -19,12 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CalibrationStateExecutor.cpp" />
     <ClCompile Include="SkinCalibratior.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="VideoDispatcher.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CalibrationStateExecutor.h" />
     <ClInclude Include="SkinCalibrator.h" />
+    <ClInclude Include="StateExecutor.h" />
     <ClInclude Include="VideoDispatcher.h" />
     <ClInclude Include="VideoDispatcherState.h" />
   </ItemGroup>
