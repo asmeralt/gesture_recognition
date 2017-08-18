@@ -15,6 +15,11 @@ private:
 	VideoDispatcherState state;
 	CalibrationStateExecutor& calibration;
 
+
+
+	int exampleId = 0;
+	bool save = false;
+
 public:
 	VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, CalibrationStateExecutor& calibration);
 
