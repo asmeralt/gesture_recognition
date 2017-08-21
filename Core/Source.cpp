@@ -1,4 +1,5 @@
 #include <iostream>
+#include <opencv2\ml.hpp>
 #include "SkinCalibrator.h"
 #include "CalibrationStateExecutor.h"
 #include "VideoDispatcher.h"
@@ -10,7 +11,7 @@ const std::string windowName = "Gesture recognition";
 const int frameCaptureDelayMillis = 40;  // approx 25 frames per second
 
 int main(int argc, char** argv) {
-	VideoDispatcher dispatcher ("Gesture detector", frameCaptureDelayMillis, CalibrationStateExecutor(SkinCalibrator(), 0.3f));
+	VideoDispatcher dispatcher ("Gesture detector", frameCaptureDelayMillis, CalibrationStateExecutor(SkinCalibrator(), 0.3f), cv::ml::ANN_MLP::load("..\\data\\nn\\networks\\ann.yml"));
 
 	try {
 		dispatcher.run();

@@ -5,11 +5,12 @@
 #include <opencv2\imgproc.hpp>
 
 // public
-VideoDispatcher::VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, CalibrationStateExecutor& calibrationStateExecutor) :
+VideoDispatcher::VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, CalibrationStateExecutor& calibrationStateExecutor, cv::Ptr<cv::ml::ANN_MLP> ann) :
 	windowName(windowName),
 	frameCaptureDelayMillis(frameCaptureDelayMillis),
 	state(VD_CALIBRATION),
-	calibration(calibrationStateExecutor)
+	calibration(calibrationStateExecutor),
+	ann(ann)
 {
 }
 
@@ -35,7 +36,7 @@ void VideoDispatcher::run() {
 		}
 
 		switch (state) {
-		case VD_CALIBRATION: calibration.execute(frame); recognition(frame); break;
+		case VD_CALIBRATION: calibration.execute(frame); break;
 		case VD_RECOGNITION: recognition(frame); break;
 		case VD_EXIT: return;
 		default: throw std::exception("Ooops, given dispatcher state %i is not implemented yet");
@@ -46,8 +47,8 @@ void VideoDispatcher::run() {
 		// Break "while loop" when Esc is pressed, start calibration when 'c' is pressed, begin recognition when 'r' is pressed
 		switch (cv::waitKey(frameCaptureDelayMillis)) {
 		case 27: state = VD_EXIT; break; // Esc key code is 27
-		case 'c': state = VD_CALIBRATION; save = false; break;
-		case 'r': state = VD_RECOGNITION; save = true; break;
+		case 'c': state = VD_CALIBRATION; break;
+		case 'r': state = VD_RECOGNITION; break;
 		default: break;
 		}
 	}
@@ -58,28 +59,34 @@ void VideoDispatcher::recognition(cv::Mat& frame) {
 	cv::Mat mask;
 	cv::Mat blurredFrame;
 	cv::cvtColor(frame, frame, cv::COLOR_BGR2YCrCb);
-	cv::medianBlur(frame, blurredFrame, 3);
+	cv::medianBlur(frame, blurredFrame, 9);
 	std::vector<cv::Scalar>& skinColorFilterRange = this->calibration.getSkinColorFilterRange();
 	cv::inRange(blurredFrame, skinColorFilterRange[0], skinColorFilterRange[1], mask);
-	cv::morphologyEx(mask, mask, cv::MORPH_CLOSE, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(5, 5)), cv::Point(-1, -1), 3);
-	//cv::morphologyEx(mask, mask, cv::MORPH_OPEN, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3)), cv::Point(-1, -1), 3);
-	//cv::morphologyEx(mask, mask, cv::MORPH_CLOSE, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(15, 15)));
+	cv::morphologyEx(mask, mask, cv::MORPH_CLOSE, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3)), cv::Point(-1, -1), 3);
 	cv::cvtColor(frame, frame, cv::COLOR_YCrCb2BGR);
 	imshow("Mask", mask);
-	if (this->save) {
-		int squareSize = frame.rows / 1.8;
-		int squareThickness = 2;
-		cv::Rect alertRectangle(0, (frame.rows - squareSize) / 2, squareSize + 2 * squareThickness, squareSize + 2 * squareThickness);
-		cv::rectangle(frame, alertRectangle, cv::Scalar(0, 255, 255), squareThickness, cv::LINE_4);
-		cv::Rect roiRect(squareThickness, (frame.rows - squareSize) / 2 + squareThickness, squareSize, squareSize);
+	
+	int squareSize = frame.rows / 2.2;
+	int squareThickness = 2;
+	cv::Rect alertRectangle(0, (frame.rows - squareSize) / 2, squareSize + 2 * squareThickness, squareSize + 2 * squareThickness);
+	cv::rectangle(frame, alertRectangle, cv::Scalar(0, 255, 255), squareThickness, cv::LINE_4);
+	cv::Rect roiRect(0, (frame.rows - squareSize) / 2 + squareThickness, squareSize, squareSize);
 
-		cv::Mat roi = blurredFrame(roiRect);
-		cv::Mat roiMask = mask(roiRect);
-		cv::cvtColor(roi, roi, cv::COLOR_BGR2GRAY);
-		cv::Mat example;
-		roi.copyTo(example, roiMask);
-		cv::resize(example, example, cv::Size(32, 32));
-		bool result = cv::imwrite(cv::format("..\\data\\scissors\\example_%i.bmp", exampleId), example);
-		exampleId++;
+	cv::Mat roiMask = mask(roiRect);
+	cv::resize(roiMask, roiMask, cv::Size(16, 16));
+	roiMask = roiMask.reshape(0, 1);
+	roiMask.convertTo(roiMask, CV_32FC1);
+	cv::Mat prediction;
+	ann->predict(roiMask, prediction);
+	double min;
+	double max;
+	cv::Point minLoc;
+	cv::Point maxLoc;
+	prediction = prediction > 175;
+	cv::minMaxLoc(prediction, &min, &max, &minLoc, &maxLoc);
+	switch (maxLoc.x) {
+	case 0: std::cout << "Paper" << std::endl; break;
+	case 1: std::cout << "Rock" << std::endl; break;
+	case 2: std::cout << "Scissors" << std::endl; break;
 	}
 }

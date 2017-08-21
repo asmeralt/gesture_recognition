@@ -1,8 +1,9 @@
 #pragma once
-#include "VideoDispatcherState.h"
-#include "SkinCalibrator.h"
 #include <string>
 #include <opencv2\core.hpp>
+#include <opencv2\ml.hpp>
+#include "VideoDispatcherState.h"
+#include "SkinCalibrator.h"
 #include "CalibrationStateExecutor.h"
 
 class VideoDispatcher
@@ -15,13 +16,10 @@ private:
 	VideoDispatcherState state;
 	CalibrationStateExecutor& calibration;
 
-
-
-	int exampleId = 0;
-	bool save = false;
+	cv::Ptr<cv::ml::ANN_MLP> ann;
 
 public:
-	VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, CalibrationStateExecutor& calibration);
+	VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, CalibrationStateExecutor& calibration, cv::Ptr<cv::ml::ANN_MLP> ann);
 
 	void run();
 

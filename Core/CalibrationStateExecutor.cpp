@@ -22,7 +22,7 @@ void CalibrationStateExecutor::execute(cv::Mat& frame) {
 	cv::Rect calibrationRect = buildAndPlotAlertRectangle(frame);
 	cv::Mat calibrationRegion;
 	cv::cvtColor(frame(calibrationRect).clone(), calibrationRegion, cv::COLOR_BGR2YCrCb);
-	cv::medianBlur(calibrationRegion, calibrationRegion, 5);
+	cv::medianBlur(calibrationRegion, calibrationRegion, 9);
 	bool channels[] = { false, true, true };
 	float alphaArr[] = { alpha, alpha, alpha };
 
