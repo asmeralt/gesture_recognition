@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
 	SampleLoader loader;
 	std::vector<Sample> samples;
 	int maxClassId;
-	loader.load(argv[1], samples, maxClassId);
+	loader.load(std::string(argv[1]), samples, maxClassId);
 	std::clog << " DONE." << std::endl;
 
 	std::vector<cv::Mat> sapmplesImages(samples.size());
