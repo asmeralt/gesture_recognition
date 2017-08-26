@@ -14,6 +14,12 @@ cv::Mat VecClassFormatter::format(int classId) {
 	return classVec;
 }
 
+int VecClassFormatter::formatBack(cv::Mat& classVec) {
+	int maxIdx;
+	cv::minMaxIdx(classVec, (double *)0, (double *)0, (int *)0, &maxIdx);
+	return maxIdx;
+}
+
 int VecClassFormatter::getRequiredColumns() {
 	return maxClassId;
 }

@@ -13,6 +13,10 @@ cv::Mat NumClassFormatter::format(int classId) {
 	return cv::Mat(1, 1, requiredType, cv::Scalar(classId));
 }
 
+int NumClassFormatter::formatBack(cv::Mat& classVec) {
+	return (int)classVec.data[0];
+}
+
 int NumClassFormatter::getRequiredColumns() {
 	return 1;
 }

@@ -13,6 +13,8 @@ public:
 
 	virtual cv::Mat format(int classId);
 
+	virtual int formatBack(cv::Mat& classVec);
+
 	virtual int getRequiredColumns();
 
 	virtual int getRequiredType();
