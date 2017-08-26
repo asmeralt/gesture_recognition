@@ -1,11 +1,14 @@
 #include "CalibrationStateExecutor.h"
+#include <opencv2\core.hpp>
+#include <opencv2\imgproc.hpp>
+#include <opencv2\highgui.hpp>
 
 #define ALPHA_TRACKBAR_MAX_VALUE 50
 #define ALPHA_TRACKBAR_COEFICIENT 3.0f / ALPHA_TRACKBAR_MAX_VALUE
 #define ALPHA_TRACKBAR_INIT_VALUE 5
 
 // public
-CalibrationStateExecutor::CalibrationStateExecutor(SkinCalibrator& skinCalibrator, float alpha) :
+CalibrationStateExecutor::CalibrationStateExecutor(SkinCalibrator* skinCalibrator, float alpha) :
 	skinCalibrator(skinCalibrator),
 	alpha(alpha),
 	skinColorFilterRange(std::vector<cv::Scalar>({ cv::Scalar(0,0,0), cv::Scalar(UCHAR_MAX, UCHAR_MAX, UCHAR_MAX) })),
@@ -16,6 +19,7 @@ CalibrationStateExecutor::CalibrationStateExecutor(SkinCalibrator& skinCalibrato
 
 CalibrationStateExecutor::~CalibrationStateExecutor()
 {
+	delete skinCalibrator;
 }
 
 void CalibrationStateExecutor::execute(cv::Mat& frame) {
@@ -27,11 +31,11 @@ void CalibrationStateExecutor::execute(cv::Mat& frame) {
 	float alphaArr[] = { alpha, alpha, alpha };
 
 	std::vector<cv::Mat> histograms(3);
-	this->skinColorFilterRange = skinCalibrator.calibrate(calibrationRegion, channels, alphaArr, histograms);
+	this->skinColorFilterRange = skinCalibrator->calibrate(calibrationRegion, channels, alphaArr, histograms);
 	showCalibrationHistograms(histograms);
 }
 
-std::vector<cv::Scalar> CalibrationStateExecutor::getSkinColorFilterRange() {
+std::vector<cv::Scalar> CalibrationStateExecutor::getSkinColorRange() {
 	return this->skinColorFilterRange;
 }
 
@@ -63,7 +67,7 @@ void CalibrationStateExecutor::plotCalibrationHistograms(std::vector<cv::Mat> hi
 	colors[1] = cv::Scalar(255, 127, 127);
 	colors[2] = cv::Scalar(127, 127, 255);
 	float alphas[] = { alpha,alpha,alpha };
-	skinCalibrator.plotHistograms(histograms, colors, alphas, dst);
+	skinCalibrator->plotHistograms(histograms, colors, alphas, dst);
 }
 
 #undef ALPHA_TRACKBAR_INIT_VALUE

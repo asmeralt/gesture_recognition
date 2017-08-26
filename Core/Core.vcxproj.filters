@@ -19,36 +19,108 @@
     <Filter Include="Source Files\StateMachine">
       <UniqueIdentifier>{eaa05baf-78d2-4ef0-bbf4-375bde6f2b3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{625428e7-6d15-4f0a-a8c6-353797648ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{3ffb8ef6-0e58-4f08-a38d-0f5e05554822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateMachine\Calibration">
+      <UniqueIdentifier>{6f2576f9-13e8-45f4-bc09-235857974a53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateMachine\Calibration">
+      <UniqueIdentifier>{4503c9fe-4951-4e92-be2b-cde87a69592a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateMachine\Recognition">
+      <UniqueIdentifier>{132fea05-325a-4d0f-9c79-545864c609fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateMachine\Recognition">
+      <UniqueIdentifier>{e532c910-f615-41f6-a882-92a4bc39b439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils\Recognizers">
+      <UniqueIdentifier>{85b39182-2259-4c1a-a41a-c31d1b215c2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils\Recognizers">
+      <UniqueIdentifier>{33a200be-09a5-492e-bd47-47c5caacb6cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SkinCalibratior.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="VideoDispatcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SkinCalibratior.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
     <ClCompile Include="CalibrationStateExecutor.cpp">
-      <Filter>Source Files\StateMachine</Filter>
+      <Filter>Source Files\StateMachine\Calibration</Filter>
+    </ClCompile>
+    <ClCompile Include="RecognitionStateExecutor.cpp">
+      <Filter>Source Files\StateMachine\Recognition</Filter>
+    </ClCompile>
+    <ClCompile Include="ANNRawRecognizer.cpp">
+      <Filter>Source Files\Utils\Recognizers</Filter>
+    </ClCompile>
+    <ClCompile Include="ANNPropsRecognizer.cpp">
+      <Filter>Source Files\Utils\Recognizers</Filter>
+    </ClCompile>
+    <ClCompile Include="NBCPropsRecognizer.cpp">
+      <Filter>Source Files\Utils\Recognizers</Filter>
+    </ClCompile>
+    <ClCompile Include="StatModelRecognizer.cpp">
+      <Filter>Source Files\Utils\Recognizers</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorMasker.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GestureRecognizer.cpp">
+      <Filter>Source Files\Utils\Recognizers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SkinCalibrator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VideoDispatcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VideoDispatcherState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CalibrationStateExecutor.h">
-      <Filter>Header Files\StateMachine</Filter>
-    </ClInclude>
     <ClInclude Include="StateExecutor.h">
       <Filter>Header Files\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinCalibrator.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="CalibrationStateExecutor.h">
+      <Filter>Header Files\StateMachine\Calibration</Filter>
+    </ClInclude>
+    <ClInclude Include="RecognitionStateExecutor.h">
+      <Filter>Header Files\StateMachine\Recognition</Filter>
+    </ClInclude>
+    <ClInclude Include="Recognizer.h">
+      <Filter>Header Files\Utils\Recognizers</Filter>
+    </ClInclude>
+    <ClInclude Include="Gesture.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ANNRawRecognizer.h">
+      <Filter>Header Files\Utils\Recognizers</Filter>
+    </ClInclude>
+    <ClInclude Include="ANNPropsRecognizer.h">
+      <Filter>Header Files\Utils\Recognizers</Filter>
+    </ClInclude>
+    <ClInclude Include="NBCPropsRecognizer.h">
+      <Filter>Header Files\Utils\Recognizers</Filter>
+    </ClInclude>
+    <ClInclude Include="StatModelRecognizer.h">
+      <Filter>Header Files\Utils\Recognizers</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorMasker.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GestureRecognizer.h">
+      <Filter>Header Files\Utils\Recognizers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

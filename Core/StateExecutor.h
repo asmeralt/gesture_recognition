@@ -6,4 +6,3 @@ class StateExecutor
 public:
 	virtual void execute(cv::Mat& frame) = 0;
 };
-

@@ -1,8 +1,9 @@
 #include <iostream>
 #include <opencv2\ml.hpp>
-#include "SkinCalibrator.h"
-#include "CalibrationStateExecutor.h"
 #include "VideoDispatcher.h"
+#include "ANNRawRecognizer.h"
+#include "ANNPropsRecognizer.h"
+#include "NBCPropsRecognizer.h"
 
 // UI names consts
 const std::string windowName = "Gesture recognition";
@@ -10,8 +11,17 @@ const std::string windowName = "Gesture recognition";
 // Controls for a frame rate
 const int frameCaptureDelayMillis = 40;  // approx 25 frames per second
 
+std::vector<GestureRecognizer*> loadRecognizers(std::string annRawFile, std::string annPropsFile, std::string nbcPropsFile) {
+	std::vector<GestureRecognizer*> recognizers(3);
+	recognizers[0] = new ANNRawRecognizer(cv::ml::ANN_MLP::load(annRawFile), new RawImageFormatter(cv::Size(16, 16)));
+	recognizers[1] = new ANNPropsRecognizer(cv::ml::ANN_MLP::load(annPropsFile), new PropsImageFormatter());
+	recognizers[2] = new NBCPropsRecognizer(cv::ml::NormalBayesClassifier::load(nbcPropsFile), new PropsImageFormatter());
+	return recognizers;
+}
+
 int main(int argc, char** argv) {
-	VideoDispatcher dispatcher ("Gesture detector", frameCaptureDelayMillis, CalibrationStateExecutor(SkinCalibrator(), 0.3f), cv::ml::ANN_MLP::load("..\\data\\nn\\networks\\ann.yml"));
+	std::vector<GestureRecognizer*> recognizers = loadRecognizers("..\\data\\recognizers\\annRaw.yml","..\\data\\recognizers\\annProps.yml","..\\data\\recognizers\\nbcProps.yml");
+	VideoDispatcher dispatcher ("Gesture detector", frameCaptureDelayMillis, recognizers);
 
 	try {
 		dispatcher.run();

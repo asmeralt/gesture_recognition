@@ -5,29 +5,35 @@
 #include "VideoDispatcherState.h"
 #include "SkinCalibrator.h"
 #include "CalibrationStateExecutor.h"
+#include "RecognitionStateExecutor.h"
+#include "GestureRecognizer.h"
 
 class VideoDispatcher
 {
 private:
 	std::string windowName;
 	int frameCaptureDelayMillis;
+	size_t currentRecognizerIdx;
 
 	/* State machine */
 	VideoDispatcherState state;
-	CalibrationStateExecutor& calibration;
+	CalibrationStateExecutor* calibration;
+	RecognitionStateExecutor* recognition;
 
-	cv::Ptr<cv::ml::ANN_MLP> ann;
+	/* Recognizers */
+	std::vector<GestureRecognizer*> recognizers;
 
 public:
-	VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, CalibrationStateExecutor& calibration, cv::Ptr<cv::ml::ANN_MLP> ann);
+	VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, std::vector<GestureRecognizer*>& recognizers);
 
 	void run();
 
 	~VideoDispatcher();
-
 private:
+	void switchToCalibration();
 
-	void recognition(cv::Mat& frame);
+	void switchToRecognition();
 
+	void switchToNextRecognizer();
 };
 

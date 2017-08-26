@@ -19,17 +19,38 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ANNPropsRecognizer.cpp" />
+    <ClCompile Include="ANNRawRecognizer.cpp" />
     <ClCompile Include="CalibrationStateExecutor.cpp" />
+    <ClCompile Include="GestureRecognizer.cpp" />
+    <ClCompile Include="NBCPropsRecognizer.cpp" />
+    <ClCompile Include="RecognitionStateExecutor.cpp" />
     <ClCompile Include="SkinCalibratior.cpp" />
+    <ClCompile Include="ColorMasker.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="StatModelRecognizer.cpp" />
     <ClCompile Include="VideoDispatcher.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ANNPropsRecognizer.h" />
+    <ClInclude Include="ANNRawRecognizer.h" />
     <ClInclude Include="CalibrationStateExecutor.h" />
+    <ClInclude Include="Gesture.h" />
+    <ClInclude Include="GestureRecognizer.h" />
+    <ClInclude Include="NBCPropsRecognizer.h" />
+    <ClInclude Include="RecognitionStateExecutor.h" />
+    <ClInclude Include="Recognizer.h" />
     <ClInclude Include="SkinCalibrator.h" />
+    <ClInclude Include="ColorMasker.h" />
     <ClInclude Include="StateExecutor.h" />
+    <ClInclude Include="StatModelRecognizer.h" />
     <ClInclude Include="VideoDispatcher.h" />
     <ClInclude Include="VideoDispatcherState.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataPreprocessor\DataPreprocessor.vcxproj">
+      <Project>{dfe11357-5d06-42e3-80e6-ac88bc15b8dd}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{80b3a622-ac4a-44d0-bebd-18225555676b}</ProjectGuid>
@@ -119,7 +140,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\software\opencv\3.3.0\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Documents\Projects\C++\ComputerVisionCourseProject\DataPreprocessor;C:\software\opencv\3.3.0\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,7 +180,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\software\opencv\3.3.0\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Documents\Projects\C++\ComputerVisionCourseProject\DataPreprocessor;C:\software\opencv\3.3.0\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
