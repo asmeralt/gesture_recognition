@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Samples">
+      <UniqueIdentifier>{fa69a442-c31c-4cb9-82e0-1809278e85b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Samples">
+      <UniqueIdentifier>{ba3a2b18-ade6-4942-a6b7-ef2186396243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Trainers&amp;Testers">
+      <UniqueIdentifier>{254fbf13-4011-4426-80ef-87ce4c0ca13c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Trainers&amp;Testers">
+      <UniqueIdentifier>{81823707-d1c5-439b-abde-ffc46632ad88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FeaturesAnalysis">
+      <UniqueIdentifier>{22081161-e913-46b5-8c29-acdd305179e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FeatureAnalysis">
+      <UniqueIdentifier>{6cf123f1-a059-4537-b34a-cd08371e3fac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Samples\Formatters">
+      <UniqueIdentifier>{562e2852-71ad-4807-99fa-6e239d5fc4c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Samples\Formatters">
+      <UniqueIdentifier>{cd6bc967-aa4a-4eb1-930b-9c90e9801ac6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SampleInfo.h">
+      <Filter>Header Files\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleLoader.h">
+      <Filter>Header Files\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample.h">
+      <Filter>Header Files\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Trainer.h">
+      <Filter>Header Files\Trainers&amp;Testers</Filter>
+    </ClInclude>
+    <ClInclude Include="NBCTrainer.h">
+      <Filter>Header Files\Trainers&amp;Testers</Filter>
+    </ClInclude>
+    <ClInclude Include="ANNTrainer.h">
+      <Filter>Header Files\Trainers&amp;Testers</Filter>
+    </ClInclude>
+    <ClInclude Include="Tester.h">
+      <Filter>Header Files\Trainers&amp;Testers</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassResponseTester.h">
+      <Filter>Header Files\Trainers&amp;Testers</Filter>
+    </ClInclude>
+    <ClInclude Include="NumResponseTester.h">
+      <Filter>Header Files\Trainers&amp;Testers</Filter>
+    </ClInclude>
+    <ClInclude Include="FeatureProps.h">
+      <Filter>Header Files\FeaturesAnalysis</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleFormatter.h">
+      <Filter>Header Files\Samples\Formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassFormatter.h">
+      <Filter>Header Files\Samples\Formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="RawSampleFormatter.h">
+      <Filter>Header Files\Samples\Formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="PropsSampleFormatter.h">
+      <Filter>Header Files\Samples\Formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="NumClassFormatter.h">
+      <Filter>Header Files\Samples\Formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="VecClassFormatter.h">
+      <Filter>Header Files\Samples\Formatters</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NBCTrainer.cpp">
+      <Filter>Source Files\Trainers&amp;Testers</Filter>
+    </ClCompile>
+    <ClCompile Include="ANNTrainer.cpp">
+      <Filter>Source Files\Trainers&amp;Testers</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleLoader.cpp">
+      <Filter>Source Files\Samples</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassResponseTester.cpp">
+      <Filter>Source Files\Trainers&amp;Testers</Filter>
+    </ClCompile>
+    <ClCompile Include="NumResponseTester.cpp">
+      <Filter>Source Files\Trainers&amp;Testers</Filter>
+    </ClCompile>
+    <ClCompile Include="Tester.cpp">
+      <Filter>Source Files\Trainers&amp;Testers</Filter>
+    </ClCompile>
+    <ClCompile Include="FeatureProps.cpp">
+      <Filter>Source Files\FeatureAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="RawSampleFormatter.cpp">
+      <Filter>Source Files\Samples\Formatters</Filter>
+    </ClCompile>
+    <ClCompile Include="PropsSampleFormatter.cpp">
+      <Filter>Source Files\Samples\Formatters</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleFormatter.cpp">
+      <Filter>Source Files\Samples\Formatters</Filter>
+    </ClCompile>
+    <ClCompile Include="NumClassFormatter.cpp">
+      <Filter>Source Files\Samples\Formatters</Filter>
+    </ClCompile>
+    <ClCompile Include="VecClassFormatter.cpp">
+      <Filter>Source Files\Samples\Formatters</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
