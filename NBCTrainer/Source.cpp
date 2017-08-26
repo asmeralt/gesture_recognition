@@ -1,7 +1,8 @@
 #include "NBCTrainer.h"
 #include "SampleLoader.h"
-#include "RawSampleFormatter.h"
-#include "PropsSampleFormatter.h"
+#include "SampleFormatter.h"
+#include "RawImageFormatter.h"
+#include "PropsImageFormatter.h"
 #include "NumResponseTester.h"
 #include "NumClassFormatter.h"
 
@@ -34,12 +35,12 @@ bool parseArgs(int argc, char** argv) {
 	return true;
 }
 
-void setUpRawImageNBC(int maxClassId, SampleFormatter*& formatter) {
-	formatter = new RawSampleFormatter(new NumClassFormatter(CV_32SC1), cv::Size(SAMPLE_SIZE, SAMPLE_SIZE), maxClassId);
+void setUpRawImageNBC(SampleFormatter*& formatter) {
+	formatter = new SampleFormatter(new RawImageFormatter(cv::Size(SAMPLE_SIZE, SAMPLE_SIZE)), new NumClassFormatter(CV_32SC1));
 }
 
-void setUpSolidityPerimeterNBC(int maxClassId, SampleFormatter*& formatter) {
-	formatter = new PropsSampleFormatter(new NumClassFormatter(CV_32SC1), maxClassId);
+void setUpSolidityPerimeterNBC(SampleFormatter*& formatter) {
+	formatter = new SampleFormatter(new PropsImageFormatter(), new NumClassFormatter(CV_32SC1));
 }
 
 int main(int argc, char** argv) {
@@ -57,7 +58,7 @@ int main(int argc, char** argv) {
 	std::clog << " DONE." << std::endl;
 
 	SampleFormatter* formatter = NULL;
-	setUpRawImageNBC(maxClassId, formatter);
+	setUpRawImageNBC(formatter);
 	std::clog << "Formatting samples: ";
 	cv::Ptr<cv::ml::TrainData> trainData = formatter->format(trainSamples);
 	cv::Ptr<cv::ml::TrainData> testData = formatter->format(testSamples);

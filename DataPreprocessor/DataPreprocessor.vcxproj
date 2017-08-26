@@ -83,15 +83,16 @@
     <ClInclude Include="ClassFormatter.h" />
     <ClInclude Include="ClassResponseTester.h" />
     <ClInclude Include="FeatureProps.h" />
+    <ClInclude Include="ImageFormatter.h" />
     <ClInclude Include="NumClassFormatter.h" />
-    <ClInclude Include="RawSampleFormatter.h" />
+    <ClInclude Include="PropsImageFormatter.h" />
+    <ClInclude Include="RawImageFormatter.h" />
     <ClInclude Include="NBCTrainer.h" />
     <ClInclude Include="NumResponseTester.h" />
     <ClInclude Include="Sample.h" />
     <ClInclude Include="SampleFormatter.h" />
     <ClInclude Include="SampleInfo.h" />
     <ClInclude Include="SampleLoader.h" />
-    <ClInclude Include="PropsSampleFormatter.h" />
     <ClInclude Include="Tester.h" />
     <ClInclude Include="Trainer.h" />
     <ClInclude Include="VecClassFormatter.h" />
@@ -101,12 +102,12 @@
     <ClCompile Include="ClassResponseTester.cpp" />
     <ClCompile Include="FeatureProps.cpp" />
     <ClCompile Include="NumClassFormatter.cpp" />
-    <ClCompile Include="RawSampleFormatter.cpp" />
+    <ClCompile Include="PropsImageFormatter.cpp" />
+    <ClCompile Include="RawImageFormatter.cpp" />
     <ClCompile Include="NBCTrainer.cpp" />
     <ClCompile Include="NumResponseTester.cpp" />
     <ClCompile Include="SampleFormatter.cpp" />
     <ClCompile Include="SampleLoader.cpp" />
-    <ClCompile Include="PropsSampleFormatter.cpp" />
     <ClCompile Include="Tester.cpp" />
     <ClCompile Include="VecClassFormatter.cpp" />
   </ItemGroup>

@@ -1,7 +1,8 @@
 #include "ANNTrainer.h"
 #include "SampleLoader.h"
-#include "RawSampleFormatter.h"
-#include "PropsSampleFormatter.h"
+#include "SampleFormatter.h"
+#include "RawImageFormatter.h"
+#include "PropsImageFormatter.h"
 #include "ClassResponseTester.h"
 #include "VecClassFormatter.h"
 
@@ -41,7 +42,7 @@ bool parseArgs(int argc, char** argv) {
 }
 
 void setUpRawImageANN(int maxClassId, SampleFormatter*& formatter, int*& neurons) {
-	formatter = new RawSampleFormatter(new VecClassFormatter(maxClassId), cv::Size(SAMPLE_SIZE, SAMPLE_SIZE), maxClassId);
+	formatter = new SampleFormatter(new RawImageFormatter(cv::Size(SAMPLE_SIZE, SAMPLE_SIZE)), new VecClassFormatter(maxClassId));
 	neurons = new int[3];
 	neurons[0] = SAMPLE_SIZE * SAMPLE_SIZE;
 	neurons[1] = RAW_ANN_HIDDEN_LAYER_NEURONS;
@@ -49,7 +50,7 @@ void setUpRawImageANN(int maxClassId, SampleFormatter*& formatter, int*& neurons
 }
 
 void setUpSolidityPerimeterANN(int maxClassId, SampleFormatter*& formatter, int*& neurons) {
-	formatter = new PropsSampleFormatter(new VecClassFormatter(maxClassId), maxClassId);
+	formatter = new SampleFormatter(new PropsImageFormatter(), new VecClassFormatter(maxClassId));
 	neurons = new int[3];
 	neurons[0] = 2;
 	neurons[1] = PROPS_ANN_HIDDEN_LAYER_NEURONS;

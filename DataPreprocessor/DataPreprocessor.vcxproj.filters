@@ -75,16 +75,19 @@
     <ClInclude Include="ClassFormatter.h">
       <Filter>Header Files\Samples\Formatters</Filter>
     </ClInclude>
-    <ClInclude Include="RawSampleFormatter.h">
-      <Filter>Header Files\Samples\Formatters</Filter>
-    </ClInclude>
-    <ClInclude Include="PropsSampleFormatter.h">
-      <Filter>Header Files\Samples\Formatters</Filter>
-    </ClInclude>
     <ClInclude Include="NumClassFormatter.h">
       <Filter>Header Files\Samples\Formatters</Filter>
     </ClInclude>
     <ClInclude Include="VecClassFormatter.h">
+      <Filter>Header Files\Samples\Formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="RawImageFormatter.h">
+      <Filter>Header Files\Samples\Formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageFormatter.h">
+      <Filter>Header Files\Samples\Formatters</Filter>
+    </ClInclude>
+    <ClInclude Include="PropsImageFormatter.h">
       <Filter>Header Files\Samples\Formatters</Filter>
     </ClInclude>
   </ItemGroup>
@@ -110,12 +113,6 @@
     <ClCompile Include="FeatureProps.cpp">
       <Filter>Source Files\FeatureAnalysis</Filter>
     </ClCompile>
-    <ClCompile Include="RawSampleFormatter.cpp">
-      <Filter>Source Files\Samples\Formatters</Filter>
-    </ClCompile>
-    <ClCompile Include="PropsSampleFormatter.cpp">
-      <Filter>Source Files\Samples\Formatters</Filter>
-    </ClCompile>
     <ClCompile Include="SampleFormatter.cpp">
       <Filter>Source Files\Samples\Formatters</Filter>
     </ClCompile>
@@ -123,6 +120,12 @@
       <Filter>Source Files\Samples\Formatters</Filter>
     </ClCompile>
     <ClCompile Include="VecClassFormatter.cpp">
+      <Filter>Source Files\Samples\Formatters</Filter>
+    </ClCompile>
+    <ClCompile Include="RawImageFormatter.cpp">
+      <Filter>Source Files\Samples\Formatters</Filter>
+    </ClCompile>
+    <ClCompile Include="PropsImageFormatter.cpp">
       <Filter>Source Files\Samples\Formatters</Filter>
     </ClCompile>
   </ItemGroup>
