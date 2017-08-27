@@ -31,6 +31,8 @@ void VideoDispatcher::run() {
 
 	cv::namedWindow(windowName);
 
+	/* !!!DONT DO THIS AT HOME!!! */
+	/* Wrong State machine pattern implementation */ 
 	while (state != VD_EXIT) {
 		webcam >> frame; // reading webcam
 		if (frame.empty() || !webcam.isOpened()) { // check if webcam stream is not emtpy or closed

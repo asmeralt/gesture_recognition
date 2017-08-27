@@ -14,5 +14,7 @@ public:
 	~GestureRecognizer();
 protected:
 	Gesture classVecToGesture(cv::Mat& prediction);
+
+	Gesture classNumToGesture(cv::Mat& prediction);
 };
 

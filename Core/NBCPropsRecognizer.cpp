@@ -5,8 +5,7 @@ NBCPropsRecognizer::NBCPropsRecognizer(cv::Ptr<cv::ml::NormalBayesClassifier>& n
 }
 
 Gesture NBCPropsRecognizer::predictGesture(cv::Mat& image) {
-	cv::Mat prediction = this->predict(image);
-	return Gesture::PAPER;
+	classNumToGesture(this->predict(image));
 }
 
 NBCPropsRecognizer::~NBCPropsRecognizer()
