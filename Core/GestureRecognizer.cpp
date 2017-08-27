@@ -21,7 +21,7 @@ Gesture GestureRecognizer::classVecToGesture(cv::Mat& prediction) {
 }
 
 Gesture GestureRecognizer::classNumToGesture(cv::Mat& prediction) {
-	switch ((int)prediction.data[0]) {
+	switch ((int)prediction.data[0] - 1) {
 	case 0: return Gesture::PAPER;
 	case 1: return Gesture::ROCK;
 	case 2: return Gesture::SCISSORS;

@@ -27,7 +27,7 @@ private:
 
 	void plotGestureRoi(cv::Mat& frame, cv::Rect roiRect);
 
-	void plotDebugInfo(cv::Mat& frame);
+	void plotDebugInfo(cv::Mat& frame, double ticks);
 	
 	void plotGestureName(cv::Mat& frame, Gesture gesture);
 };

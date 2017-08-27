@@ -8,11 +8,12 @@ RecognitionStateExecutor::RecognitionStateExecutor(ColorMasker* colorMasker, Ges
 }
 
 void RecognitionStateExecutor::execute(cv::Mat& frame) {
+	double ticks = (double)cv::getTickCount();
 	cv::Mat mask = maskFrame(frame);
 	cv::Rect roiRect = roiFinder->findGestureRoi(mask);
 	cv::Mat roiMask = mask(roiRect);
 	plotGestureRoi(frame, roiRect);
-	plotDebugInfo(frame);
+	plotDebugInfo(frame, ticks);
 	plotGestureName(frame, recognizer->predictGesture(roiMask));
 	cv::imshow("Mask", mask);
 }
@@ -38,8 +39,10 @@ void RecognitionStateExecutor::plotGestureRoi(cv::Mat& frame, cv::Rect roiRect) 
 	cv::rectangle(frame, roiRect, cv::Scalar(0, 255, 255), 2, cv::LINE_4);
 }
 
-void RecognitionStateExecutor::plotDebugInfo(cv::Mat& frame) {
+void RecognitionStateExecutor::plotDebugInfo(cv::Mat& frame, double ticks) {
+	double timeMillis = ((double)cv::getTickCount() - ticks) / cv::getTickFrequency() * 1000;
 	cv::putText(frame, typeid(*(this->recognizer)).name(), cv::Point(frame.cols - 220, 80), cv::FONT_HERSHEY_PLAIN, 1, cv::Scalar(255, 255, 255));
+	cv::putText(frame, cv::format("%5.3f, ms", timeMillis), cv::Point(frame.cols - 220, 100), cv::FONT_HERSHEY_PLAIN, 1, cv::Scalar(255, 255, 255));
 }
 
 void RecognitionStateExecutor::plotGestureName(cv::Mat& frame, Gesture gesture) {
