@@ -9,9 +9,8 @@ class StatModelRecognizer:
 protected:
 	cv::Ptr<cv::ml::StatModel> model;
 
-	ImageFormatter* formatter;
 public:
-	StatModelRecognizer(cv::Ptr<cv::ml::StatModel> model, ImageFormatter* formatter);
+	StatModelRecognizer(cv::Ptr<cv::ml::StatModel> model);
 
 	virtual cv::Mat predict(cv::Mat& image);
 

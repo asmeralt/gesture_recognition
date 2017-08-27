@@ -52,7 +52,7 @@ void VideoDispatcher::run() {
 		switch (cv::waitKey(frameCaptureDelayMillis)) {
 		case 27: state = VD_EXIT; break; // Esc key code is 27
 		case 'c': switchToCalibration(); break;
-		case 'r': switchToRecognition(); break;
+		case 'r': switchToRecognition(frame, calibration->getSkinColorRange()); break;
 		case 'n': switchToNextRecognizer(); break;
 		default: break;
 		}
@@ -63,9 +63,9 @@ void VideoDispatcher::switchToCalibration() {
 	state = VD_CALIBRATION;
 }
 
-void VideoDispatcher::switchToRecognition() {
+void VideoDispatcher::switchToRecognition(cv::Mat& frame, std::vector<cv::Scalar>& skinColorRange) {
 	state = VD_RECOGNITION; 
-	recognition->setSkinColorRange(calibration->getSkinColorRange());
+	recognition->initExecutor(frame, skinColorRange);
 }
 
 void VideoDispatcher::switchToNextRecognizer() {

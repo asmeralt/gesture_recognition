@@ -1,7 +1,11 @@
 #include "GestureRecognizer.h"
 
-GestureRecognizer::GestureRecognizer(cv::Ptr<cv::ml::StatModel> model, ImageFormatter* formatter) : StatModelRecognizer(model, formatter)
+GestureRecognizer::GestureRecognizer(cv::Ptr<cv::ml::StatModel> model, ImageFormatter* formatter) : StatModelRecognizer(model), formatter(formatter)
 {
+}
+
+cv::Mat GestureRecognizer::predict(cv::Mat& image) {
+	return StatModelRecognizer::predict(formatter->format(image));
 }
 
 Gesture GestureRecognizer::classVecToGesture(cv::Mat& prediction) {
@@ -11,6 +15,7 @@ Gesture GestureRecognizer::classVecToGesture(cv::Mat& prediction) {
 	case 0: return Gesture::PAPER;
 	case 1: return Gesture::ROCK;
 	case 2: return Gesture::SCISSORS;
+	case 3: return Gesture::NONE;
 	default: return Gesture::UNKNOWN;
 	}
 }
@@ -20,6 +25,7 @@ Gesture GestureRecognizer::classNumToGesture(cv::Mat& prediction) {
 	case 0: return Gesture::PAPER;
 	case 1: return Gesture::ROCK;
 	case 2: return Gesture::SCISSORS;
+	case 3: return Gesture::NONE;
 	default: return Gesture::UNKNOWN;
 	}
 }

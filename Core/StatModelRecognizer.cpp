@@ -1,12 +1,12 @@
 #include "StatModelRecognizer.h"
 
-StatModelRecognizer::StatModelRecognizer(cv::Ptr<cv::ml::StatModel> model, ImageFormatter* formatter): model(model), formatter(formatter)
+StatModelRecognizer::StatModelRecognizer(cv::Ptr<cv::ml::StatModel> model): model(model)
 {
 }
 
-cv::Mat StatModelRecognizer::predict(cv::Mat& image) {
+cv::Mat StatModelRecognizer::predict(cv::Mat& data) {
 	cv::Mat prediction;
-	this->model.get()->predict(formatter->format(image), prediction);
+	this->model.get()->predict(data, prediction);
 	return prediction;
 }
 

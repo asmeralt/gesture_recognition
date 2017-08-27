@@ -6,8 +6,12 @@
 class GestureRecognizer:
 	public StatModelRecognizer
 {
+protected:
+	ImageFormatter* formatter;
 public:
 	GestureRecognizer(cv::Ptr<cv::ml::StatModel> model, ImageFormatter* formatter);
+
+	virtual cv::Mat predict(cv::Mat& image);
 
 	virtual Gesture predictGesture(cv::Mat& image) = 0;
 

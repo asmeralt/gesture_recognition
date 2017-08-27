@@ -17,16 +17,15 @@ void RecognitionStateExecutor::execute(cv::Mat& frame) {
 	cv::imshow("Mask", mask);
 }
 
-void RecognitionStateExecutor::setColorMasker(ColorMasker* colorMasker) {
-	this->colorMasker = colorMasker;
-}
-
 void RecognitionStateExecutor::setRecognizer(GestureRecognizer* recognizer) {
 	this->recognizer = recognizer;
 }
 
-void RecognitionStateExecutor::setSkinColorRange(std::vector<cv::Scalar>& skinColorRange) {
+void RecognitionStateExecutor::initExecutor(cv::Mat& frame, std::vector<cv::Scalar>& skinColorRange) {
 	this->skinColorRange = skinColorRange;
+	cv::Mat frameCopy;
+	cv::cvtColor(frame, frameCopy, cv::COLOR_BGR2YCrCb);
+	this->colorMasker->setMaskBackground(frameCopy, skinColorRange);
 }
 
 cv::Mat RecognitionStateExecutor::maskFrame(cv::Mat& frame) {
@@ -50,6 +49,7 @@ void RecognitionStateExecutor::plotGestureName(cv::Mat& frame, Gesture gesture) 
 	case Gesture::PAPER: gestureName = "Paper"; color = cv::Scalar(75, 255, 75); break;
 	case Gesture::ROCK: gestureName = "Rock"; color = cv::Scalar(75, 75, 255); break;
 	case Gesture::SCISSORS: gestureName = "Scissors"; color = cv::Scalar(255, 75, 75); break;
+	case Gesture::NONE: gestureName = "None"; color = cv::Scalar(255, 255, 255); break;
 	default: gestureName = "UNKNOWN";  break;
 	}
 	cv::putText(frame, gestureName, cv::Point(frame.cols - 220, 40), cv::FONT_HERSHEY_PLAIN, 3, color, 3);

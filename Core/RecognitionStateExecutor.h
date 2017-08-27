@@ -17,11 +17,9 @@ public:
 
 	virtual void execute(cv::Mat& frame);
 
-	void setColorMasker(ColorMasker* colorMasker);
-
 	void setRecognizer(GestureRecognizer* recognizer);
 
-	void setSkinColorRange(std::vector<cv::Scalar>& skinColorRange);
+	void initExecutor(cv::Mat& frame, std::vector<cv::Scalar>& skinColorRange);
 
 	~RecognitionStateExecutor();
 private:

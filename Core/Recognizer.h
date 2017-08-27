@@ -4,6 +4,6 @@
 class Recognizer
 {
 public:
-	virtual cv::Mat predict(cv::Mat& image) = 0;
+	virtual cv::Mat predict(cv::Mat& data) = 0;
 };
 

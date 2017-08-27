@@ -32,7 +32,7 @@ public:
 private:
 	void switchToCalibration();
 
-	void switchToRecognition();
+	void switchToRecognition(cv::Mat& frame, std::vector<cv::Scalar>& skinColorRange);
 
 	void switchToNextRecognizer();
 };
