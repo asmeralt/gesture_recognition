@@ -84,6 +84,7 @@
     <ClInclude Include="ClassResponseTester.h" />
     <ClInclude Include="FeatureProps.h" />
     <ClInclude Include="ImageFormatter.h" />
+    <ClInclude Include="no_contours_exception.h" />
     <ClInclude Include="NumClassFormatter.h" />
     <ClInclude Include="PropsImageFormatter.h" />
     <ClInclude Include="RawImageFormatter.h" />
@@ -101,6 +102,7 @@
     <ClCompile Include="ANNTrainer.cpp" />
     <ClCompile Include="ClassResponseTester.cpp" />
     <ClCompile Include="FeatureProps.cpp" />
+    <ClCompile Include="no_contours_exception.cpp" />
     <ClCompile Include="NumClassFormatter.cpp" />
     <ClCompile Include="PropsImageFormatter.cpp" />
     <ClCompile Include="RawImageFormatter.cpp" />

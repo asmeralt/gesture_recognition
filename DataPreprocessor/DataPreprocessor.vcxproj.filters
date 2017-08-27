@@ -90,6 +90,9 @@
     <ClInclude Include="PropsImageFormatter.h">
       <Filter>Header Files\Samples\Formatters</Filter>
     </ClInclude>
+    <ClInclude Include="no_contours_exception.h">
+      <Filter>Header Files\FeaturesAnalysis</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NBCTrainer.cpp">
@@ -127,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="PropsImageFormatter.cpp">
       <Filter>Source Files\Samples\Formatters</Filter>
+    </ClCompile>
+    <ClCompile Include="no_contours_exception.cpp">
+      <Filter>Source Files\FeatureAnalysis</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

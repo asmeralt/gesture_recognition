@@ -1,12 +1,18 @@
 #include "FeatureProps.h"
 #include <opencv2\imgproc.hpp>
+#include "no_contours_exception.h"
 
 std::vector<cv::Point> FeatureProps::findMaxContour(cv::Mat& sample) {
 	std::vector<std::vector<cv::Point>> sampleContours;
 	cv::findContours(sample, sampleContours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_TC89_KCOS);
-	return std::max_element(sampleContours.begin(), sampleContours.end(), [](std::vector<cv::Point>& a, std::vector<cv::Point>& b) {
-		return cv::contourArea(a) < cv::contourArea(b);
-	})[0];
+	if (sampleContours.size() > 0) {
+		return std::max_element(sampleContours.begin(), sampleContours.end(), [](std::vector<cv::Point>& a, std::vector<cv::Point>& b) {
+			return cv::contourArea(a) < cv::contourArea(b);
+		})[0];
+	}
+	else {
+		throw no_contours_exception();
+	}
 }
 
 std::vector<std::vector<cv::Point>> FeatureProps::findMaxContours(std::vector<cv::Mat>& samples) {
