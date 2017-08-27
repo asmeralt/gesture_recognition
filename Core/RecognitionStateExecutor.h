@@ -23,6 +23,8 @@ public:
 
 	~RecognitionStateExecutor();
 private:
-	void displayDebugInfo(cv::Mat& frame);
+	void plotDebugInfo(cv::Mat& frame);
+
+	void plotGesture(cv::Mat& frame, Gesture gesture);
 };
 

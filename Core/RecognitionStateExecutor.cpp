@@ -21,13 +21,8 @@ void RecognitionStateExecutor::execute(cv::Mat& frame) {
 	cv::Rect roiRect(0, (frame.rows - squareSize) / 2 + squareThickness, squareSize, squareSize);
 
 	cv::Mat roiMask = mask(roiRect);
-	Gesture gesture = recognizer->predictGesture(roiMask);
+	plotGesture(frame, recognizer->predictGesture(roiMask));
 
-	switch (gesture) {
-	case 0: std::cout << "Paper" << std::endl; break;
-	case 1: std::cout << "Rock" << std::endl; break;
-	case 2: std::cout << "Scissors" << std::endl; break;
-	}
 }
 
 void RecognitionStateExecutor::setColorMasker(ColorMasker* colorMasker) {
@@ -42,8 +37,20 @@ void RecognitionStateExecutor::setSkinColorRange(std::vector<cv::Scalar>& skinCo
 	this->skinColorRange = skinColorRange;
 }
 
-void displayDebugInfo(cv::Mat& frame) {
+void RecognitionStateExecutor::plotDebugInfo(cv::Mat& frame) {
 	//cv::text
+}
+
+void RecognitionStateExecutor::plotGesture(cv::Mat& frame, Gesture gesture) {
+	cv::Scalar color;
+	std::string gestureName;
+	switch (gesture) {
+	case Gesture::PAPER: gestureName = "Paper"; color = cv::Scalar(75, 255, 75); break;
+	case Gesture::ROCK: gestureName = "Rock"; color = cv::Scalar(75, 75, 255); break;
+	case Gesture::SCISSORS: gestureName = "Scissors"; color = cv::Scalar(255, 75, 75); break;
+	default: gestureName = "UNKNOWN";  break;
+	}
+	cv::putText(frame, gestureName, cv::Point(frame.cols - 220, 40), cv::FONT_HERSHEY_PLAIN, 3, color, 3);
 }
 
 RecognitionStateExecutor::~RecognitionStateExecutor()
