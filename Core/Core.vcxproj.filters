@@ -78,6 +78,9 @@
     <ClCompile Include="GestureRecognizer.cpp">
       <Filter>Source Files\Utils\Recognizers</Filter>
     </ClCompile>
+    <ClCompile Include="GestureRoiFinder.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoDispatcher.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="GestureRecognizer.h">
       <Filter>Header Files\Utils\Recognizers</Filter>
+    </ClInclude>
+    <ClInclude Include="GestureRoiFinder.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

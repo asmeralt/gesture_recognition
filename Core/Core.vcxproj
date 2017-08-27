@@ -23,6 +23,7 @@
     <ClCompile Include="ANNRawRecognizer.cpp" />
     <ClCompile Include="CalibrationStateExecutor.cpp" />
     <ClCompile Include="GestureRecognizer.cpp" />
+    <ClCompile Include="GestureRoiFinder.cpp" />
     <ClCompile Include="NBCPropsRecognizer.cpp" />
     <ClCompile Include="RecognitionStateExecutor.cpp" />
     <ClCompile Include="SkinCalibratior.cpp" />
@@ -37,6 +38,7 @@
     <ClInclude Include="CalibrationStateExecutor.h" />
     <ClInclude Include="Gesture.h" />
     <ClInclude Include="GestureRecognizer.h" />
+    <ClInclude Include="GestureRoiFinder.h" />
     <ClInclude Include="NBCPropsRecognizer.h" />
     <ClInclude Include="RecognitionStateExecutor.h" />
     <ClInclude Include="Recognizer.h" />

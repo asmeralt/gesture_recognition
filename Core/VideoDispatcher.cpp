@@ -13,7 +13,7 @@ VideoDispatcher::VideoDispatcher(std::string windowName, int frameCaptureDelayMi
 {
 	currentRecognizerIdx = 0;
 	this->calibration = new CalibrationStateExecutor(new SkinCalibrator(), 0.3f);
-	this->recognition = new RecognitionStateExecutor(new ColorMasker(), this->recognizers[currentRecognizerIdx]);
+	this->recognition = new RecognitionStateExecutor(new ColorMasker(), new GestureRoiFinder(), this->recognizers[currentRecognizerIdx]);
 }
 
 VideoDispatcher::~VideoDispatcher()
@@ -70,5 +70,5 @@ void VideoDispatcher::switchToRecognition() {
 
 void VideoDispatcher::switchToNextRecognizer() {
 	currentRecognizerIdx = (currentRecognizerIdx + 1) % this->recognizers.size();
-	recognition->setRecognizer(this->recognizers[currentRecognizerIdx++]);
+	recognition->setRecognizer(this->recognizers[currentRecognizerIdx]);
 }

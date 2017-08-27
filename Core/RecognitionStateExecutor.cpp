@@ -3,26 +3,18 @@
 #include <opencv2\highgui.hpp>
 #include <iostream>
 
-RecognitionStateExecutor::RecognitionStateExecutor(ColorMasker* colorMasker, GestureRecognizer* recognizer): colorMasker(colorMasker), recognizer(recognizer)
+RecognitionStateExecutor::RecognitionStateExecutor(ColorMasker* colorMasker, GestureRoiFinder* roiFinder, GestureRecognizer* recognizer): colorMasker(colorMasker), roiFinder(roiFinder), recognizer(recognizer)
 {
 }
 
 void RecognitionStateExecutor::execute(cv::Mat& frame) {
-	ColorMasker masker;
-	cv::cvtColor(frame, frame, cv::COLOR_BGR2YCrCb);
-	cv::Mat mask = masker.mask(frame, skinColorRange);
-	cv::cvtColor(frame, frame, cv::COLOR_YCrCb2BGR);
-	cv::imshow("Mask", mask);
-
-	int squareSize = frame.rows / 2.2;
-	int squareThickness = 2;
-	cv::Rect alertRectangle(0, (frame.rows - squareSize) / 2, squareSize + 2 * squareThickness, squareSize + 2 * squareThickness);
-	cv::rectangle(frame, alertRectangle, cv::Scalar(0, 255, 255), squareThickness, cv::LINE_4);
-	cv::Rect roiRect(0, (frame.rows - squareSize) / 2 + squareThickness, squareSize, squareSize);
-
+	cv::Mat mask = maskFrame(frame);
+	cv::Rect roiRect = roiFinder->findGestureRoi(mask);
 	cv::Mat roiMask = mask(roiRect);
-	plotGesture(frame, recognizer->predictGesture(roiMask));
-
+	plotGestureRoi(frame, roiRect);
+	plotDebugInfo(frame);
+	plotGestureName(frame, recognizer->predictGesture(roiMask));
+	cv::imshow("Mask", mask);
 }
 
 void RecognitionStateExecutor::setColorMasker(ColorMasker* colorMasker) {
@@ -37,11 +29,21 @@ void RecognitionStateExecutor::setSkinColorRange(std::vector<cv::Scalar>& skinCo
 	this->skinColorRange = skinColorRange;
 }
 
-void RecognitionStateExecutor::plotDebugInfo(cv::Mat& frame) {
-	//cv::text
+cv::Mat RecognitionStateExecutor::maskFrame(cv::Mat& frame) {
+	cv::Mat frameCopy;
+	cv::cvtColor(frame, frameCopy, cv::COLOR_BGR2YCrCb);
+	return colorMasker->mask(frameCopy, skinColorRange);
 }
 
-void RecognitionStateExecutor::plotGesture(cv::Mat& frame, Gesture gesture) {
+void RecognitionStateExecutor::plotGestureRoi(cv::Mat& frame, cv::Rect roiRect) {
+	cv::rectangle(frame, roiRect, cv::Scalar(0, 255, 255), 2, cv::LINE_4);
+}
+
+void RecognitionStateExecutor::plotDebugInfo(cv::Mat& frame) {
+	cv::putText(frame, typeid(*(this->recognizer)).name(), cv::Point(frame.cols - 220, 80), cv::FONT_HERSHEY_PLAIN, 1, cv::Scalar(255, 255, 255));
+}
+
+void RecognitionStateExecutor::plotGestureName(cv::Mat& frame, Gesture gesture) {
 	cv::Scalar color;
 	std::string gestureName;
 	switch (gesture) {

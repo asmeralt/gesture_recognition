@@ -5,7 +5,7 @@ ColorMasker::ColorMasker()
 {
 }
 
-cv::Mat ColorMasker::mask(cv::Mat& image, std::vector<cv::Scalar> colorRange) {
+cv::Mat ColorMasker::mask(cv::Mat& image, std::vector<cv::Scalar>& colorRange) {
 	cv::Mat mask;
 	cv::Mat blurredImage;
 	cv::medianBlur(image, blurredImage, 9);
