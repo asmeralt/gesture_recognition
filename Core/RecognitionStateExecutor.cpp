@@ -10,11 +10,11 @@ RecognitionStateExecutor::RecognitionStateExecutor(ColorMasker* colorMasker, Ges
 void RecognitionStateExecutor::execute(cv::Mat& frame) {
 	double ticks = (double)cv::getTickCount();
 	cv::Mat mask = maskFrame(frame);
-	cv::Rect roiRect = roiFinder->findGestureRoi(mask);
+	cv::Rect roiRect = findRoi(mask);
 	cv::Mat roiMask = mask(roiRect);
 	plotGestureRoi(frame, roiRect);
 	plotDebugInfo(frame, ticks);
-	plotGestureName(frame, recognizer->predictGesture(roiMask));
+	plotGestureName(frame, recognizeGesture(roiMask));
 	cv::imshow("Mask", mask);
 }
 
@@ -35,6 +35,14 @@ cv::Mat RecognitionStateExecutor::maskFrame(cv::Mat& frame) {
 	return colorMasker->mask(frameCopy, skinColorRange);
 }
 
+cv::Rect RecognitionStateExecutor::findRoi(cv::Mat& mask) {
+	return roiFinder->findGestureRoi(mask);
+}
+
+Gesture RecognitionStateExecutor::recognizeGesture(cv::Mat& roiMask) {
+	return recognizer->predictGesture(roiMask);
+}
+
 void RecognitionStateExecutor::plotGestureRoi(cv::Mat& frame, cv::Rect roiRect) {
 	cv::rectangle(frame, roiRect, cv::Scalar(0, 255, 255), 2, cv::LINE_4);
 }
@@ -46,16 +54,29 @@ void RecognitionStateExecutor::plotDebugInfo(cv::Mat& frame, double ticks) {
 }
 
 void RecognitionStateExecutor::plotGestureName(cv::Mat& frame, Gesture gesture) {
-	cv::Scalar color;
-	std::string gestureName;
-	switch (gesture) {
-	case Gesture::PAPER: gestureName = "Paper"; color = cv::Scalar(75, 255, 75); break;
-	case Gesture::ROCK: gestureName = "Rock"; color = cv::Scalar(75, 75, 255); break;
-	case Gesture::SCISSORS: gestureName = "Scissors"; color = cv::Scalar(255, 75, 75); break;
-	case Gesture::NONE: gestureName = "None"; color = cv::Scalar(255, 255, 255); break;
-	default: gestureName = "UNKNOWN";  break;
-	}
+	cv::Scalar color = getGestureColor(gesture);
+	std::string gestureName = getGestureName(gesture);
 	cv::putText(frame, gestureName, cv::Point(frame.cols - 220, 40), cv::FONT_HERSHEY_PLAIN, 3, color, 3);
+}
+
+std::string RecognitionStateExecutor::getGestureName(Gesture gesture) {
+	switch (gesture) {
+	case Gesture::PAPER: return "Paper";
+	case Gesture::ROCK: return "Rock";
+	case Gesture::SCISSORS: return "Scissors";
+	case Gesture::NONE: return "None";
+	default: return "UNKNOWN";
+	}
+}
+
+cv::Scalar RecognitionStateExecutor::getGestureColor(Gesture gesture) {
+	switch (gesture) {
+	case Gesture::PAPER: return cv::Scalar(75, 255, 75);
+	case Gesture::ROCK: return cv::Scalar(75, 75, 255);
+	case Gesture::SCISSORS: return cv::Scalar(255, 75, 75);
+	case Gesture::NONE: return cv::Scalar(255, 255, 255);
+	default: return cv::Scalar(255, 255, 255);
+	}
 }
 
 RecognitionStateExecutor::~RecognitionStateExecutor()

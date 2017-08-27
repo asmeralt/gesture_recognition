@@ -6,6 +6,7 @@
 #include "NBCPropsRecognizer.h"
 
 // UI names consts
+const int gameDurationTimeSec = 3;
 const std::string windowName = "Gesture recognition";
 
 // Controls for a frame rate
@@ -21,7 +22,7 @@ std::vector<GestureRecognizer*> loadRecognizers(std::string annRawFile, std::str
 
 int main(int argc, char** argv) {
 	std::vector<GestureRecognizer*> recognizers = loadRecognizers("..\\data\\recognizers\\annRaw.yml","..\\data\\recognizers\\annProps.yml","..\\data\\recognizers\\nbcProps.yml");
-	VideoDispatcher dispatcher ("Gesture detector", frameCaptureDelayMillis, recognizers);
+	VideoDispatcher dispatcher ("Gesture detector", frameCaptureDelayMillis, gameDurationTimeSec, recognizers);
 
 	try {
 		dispatcher.run();

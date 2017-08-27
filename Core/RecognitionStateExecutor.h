@@ -17,18 +17,26 @@ public:
 
 	virtual void execute(cv::Mat& frame);
 
-	void setRecognizer(GestureRecognizer* recognizer);
+	virtual void setRecognizer(GestureRecognizer* recognizer);
 
-	void initExecutor(cv::Mat& frame, std::vector<cv::Scalar>& skinColorRange);
+	virtual void initExecutor(cv::Mat& frame, std::vector<cv::Scalar>& skinColorRange);
 
 	~RecognitionStateExecutor();
-private:
+protected:
 	cv::Mat maskFrame(cv::Mat& frame);
+
+	cv::Rect findRoi(cv::Mat& mask);
+
+	Gesture recognizeGesture(cv::Mat& roiMask);
 
 	void plotGestureRoi(cv::Mat& frame, cv::Rect roiRect);
 
 	void plotDebugInfo(cv::Mat& frame, double ticks);
 	
 	void plotGestureName(cv::Mat& frame, Gesture gesture);
+
+	std::string getGestureName(Gesture gesture);
+
+	cv::Scalar getGestureColor(Gesture gesture);
 };
 

@@ -43,6 +43,18 @@
     <Filter Include="Source Files\Utils\Recognizers">
       <UniqueIdentifier>{33a200be-09a5-492e-bd47-47c5caacb6cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\StateMachine\Game">
+      <UniqueIdentifier>{816c2716-ca66-486a-a817-689f6e9484d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateMachine\Game">
+      <UniqueIdentifier>{be40eac5-2cdb-4274-bb65-f632ed475101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils\AI">
+      <UniqueIdentifier>{7c83661a-d41f-4544-82ea-0842dcc27626}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils\AI">
+      <UniqueIdentifier>{90251398-137c-425a-975b-1fc4755cbf25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -80,6 +92,21 @@
     </ClCompile>
     <ClCompile Include="GestureRoiFinder.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateExecutor.cpp">
+      <Filter>Source Files\StateMachine\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="EasyRPSGameAI.cpp">
+      <Filter>Source Files\Utils\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="MidRPSGameAI.cpp">
+      <Filter>Source Files\Utils\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomRPSGameAI.cpp">
+      <Filter>Source Files\Utils\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="HardRPSGameAI.cpp">
+      <Filter>Source Files\Utils\AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +154,27 @@
     </ClInclude>
     <ClInclude Include="GestureRoiFinder.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateExecutor.h">
+      <Filter>Header Files\StateMachine\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameResult.h">
+      <Filter>Header Files\StateMachine\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="RPSGameAI.h">
+      <Filter>Header Files\Utils\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyRPSGameAI.h">
+      <Filter>Header Files\Utils\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="MidRPSGameAI.h">
+      <Filter>Header Files\Utils\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomRPSGameAI.h">
+      <Filter>Header Files\Utils\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="HardRPSGameAI.h">
+      <Filter>Header Files\Utils\AI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 #include "SkinCalibrator.h"
 #include "CalibrationStateExecutor.h"
 #include "RecognitionStateExecutor.h"
+#include "GameStateExecutor.h"
 #include "GestureRecognizer.h"
 
 class VideoDispatcher
@@ -19,12 +20,13 @@ private:
 	VideoDispatcherState state;
 	CalibrationStateExecutor* calibration;
 	RecognitionStateExecutor* recognition;
+	GameStateExecutor* game;
 
 	/* Recognizers */
 	std::vector<GestureRecognizer*> recognizers;
 
 public:
-	VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, std::vector<GestureRecognizer*>& recognizers);
+	VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, int gameDurationTimeSec, std::vector<GestureRecognizer*>& recognizers);
 
 	void run();
 
@@ -33,6 +35,8 @@ private:
 	void switchToCalibration();
 
 	void switchToRecognition(cv::Mat& frame, std::vector<cv::Scalar>& skinColorRange);
+
+	void switchToGame(cv::Mat& frame, std::vector<cv::Scalar>& skinColorRange);
 
 	void switchToNextRecognizer();
 };
