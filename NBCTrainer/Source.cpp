@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
 	std::clog << " DONE." << std::endl;
 
 	SampleFormatter* formatter = NULL;
-	setUpRawImageNBC(formatter);
+	setUpSolidityPerimeterNBC(formatter);
 	std::clog << "Formatting samples: ";
 	cv::Ptr<cv::ml::TrainData> trainData = formatter->format(trainSamples);
 	cv::Ptr<cv::ml::TrainData> testData = formatter->format(testSamples);
