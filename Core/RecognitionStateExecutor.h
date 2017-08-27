@@ -22,5 +22,7 @@ public:
 	void setSkinColorRange(std::vector<cv::Scalar>& skinColorRange);
 
 	~RecognitionStateExecutor();
+private:
+	void displayDebugInfo(cv::Mat& frame);
 };
 

@@ -42,6 +42,10 @@ void RecognitionStateExecutor::setSkinColorRange(std::vector<cv::Scalar>& skinCo
 	this->skinColorRange = skinColorRange;
 }
 
+void displayDebugInfo(cv::Mat& frame) {
+	//cv::text
+}
+
 RecognitionStateExecutor::~RecognitionStateExecutor()
 {
 }
