@@ -17,11 +17,6 @@ CalibrationStateExecutor::CalibrationStateExecutor(SkinCalibrator* skinCalibrato
 {
 }
 
-CalibrationStateExecutor::~CalibrationStateExecutor()
-{
-	delete skinCalibrator;
-}
-
 void CalibrationStateExecutor::execute(cv::Mat& frame) {
 	cv::Rect calibrationRect = buildAndPlotAlertRectangle(frame);
 	cv::Mat calibrationRegion;
@@ -68,6 +63,11 @@ void CalibrationStateExecutor::plotCalibrationHistograms(std::vector<cv::Mat> hi
 	colors[2] = cv::Scalar(127, 127, 255);
 	float alphas[] = { alpha,alpha,alpha };
 	skinCalibrator->plotHistograms(histograms, colors, alphas, dst);
+}
+
+CalibrationStateExecutor::~CalibrationStateExecutor()
+{
+	delete skinCalibrator;
 }
 
 #undef ALPHA_TRACKBAR_INIT_VALUE

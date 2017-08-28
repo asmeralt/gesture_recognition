@@ -18,7 +18,7 @@ public:
 
 	std::vector<cv::Scalar> getSkinColorRange();
 	
-	~CalibrationStateExecutor();
+	virtual ~CalibrationStateExecutor();
 private:
 	cv::Rect buildAndPlotAlertRectangle(cv::Mat&  frame);
 

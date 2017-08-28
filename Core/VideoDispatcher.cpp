@@ -90,6 +90,20 @@ void VideoDispatcher::switchToNextRecognizer() {
 	}
 }
 
+
+void VideoDispatcher::deleteRecognizers(std::vector<GestureRecognizer*>& recognizers, size_t currentRecognizerIdx) {
+	for (int i = 0; i < recognizers.size(); ++i) {
+		if (i != currentRecognizerIdx) {
+			delete recognizers[i];
+		}
+	}
+}
+
 VideoDispatcher::~VideoDispatcher()
 {
+	delete calibration;
+	delete recognition;
+	delete game;
+	deleteRecognizers(recognizers, currentRecognizerIdx);
+	deleteRecognizers(gameRecognizers, currentGameRecognizerIdx);
 }

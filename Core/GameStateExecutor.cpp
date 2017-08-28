@@ -120,4 +120,7 @@ void GameStateExecutor::plotAIInfo(cv::Mat& frame) {
 
 GameStateExecutor::~GameStateExecutor()
 {
+	for (std::vector<RPSGameAI*>::iterator it = gameAIs.begin(); it != gameAIs.end(); ++it) {
+		delete (*it);
+	}
 }

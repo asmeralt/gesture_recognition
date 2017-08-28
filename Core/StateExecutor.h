@@ -4,5 +4,9 @@
 class StateExecutor
 {
 public:
+	StateExecutor();
+
 	virtual void execute(cv::Mat& frame) = 0;
+
+	virtual ~StateExecutor();
 };

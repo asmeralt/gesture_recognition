@@ -15,7 +15,7 @@ public:
 
 	virtual Gesture predictGesture(cv::Mat& image) = 0;
 
-	~GestureRecognizer();
+	virtual ~GestureRecognizer();
 protected:
 	Gesture classVecToGesture(cv::Mat& prediction);
 

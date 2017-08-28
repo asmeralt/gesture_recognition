@@ -42,5 +42,7 @@ private:
 	void switchToGame(cv::Mat& frame, std::vector<cv::Scalar>& skinColorRange);
 
 	void switchToNextRecognizer();
+
+	void deleteRecognizers(std::vector<GestureRecognizer*>& recognizers, size_t currentRecognizerIdx);
 };
 

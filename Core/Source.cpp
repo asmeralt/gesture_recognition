@@ -24,16 +24,19 @@ std::vector<GestureRecognizer*> loadRecognizers(char* annRawFile, char* annProps
 	return recognizers;
 }
 
-int main(int argc, char** argv) {
-	std::vector<GestureRecognizer*> recognizers = loadRecognizers("..\\data\\recognizers\\annRaw.yml","..\\data\\recognizers\\annProps.yml","..\\data\\recognizers\\nbcProps.yml");
-	std::vector<GestureRecognizer*> gameRecognizers = loadRecognizers("..\\data\\recognizers\\annRaw.yml", "..\\data\\recognizers\\annProps.yml", "..\\data\\recognizers\\nbcProps.yml");
-
+std::vector<RPSGameAI*> loadGameAIs() {
 	std::vector<RPSGameAI*> gameAIs;
 	gameAIs.push_back(new EasyRPSGameAI());
 	gameAIs.push_back(new MidRPSGameAI());
 	gameAIs.push_back(new RandomRPSGameAI());
 	gameAIs.push_back(new HardRPSGameAI());
+	return gameAIs;
+}
 
+int main(int argc, char** argv) {
+	std::vector<GestureRecognizer*> recognizers = loadRecognizers("..\\data\\recognizers\\annRaw.yml","..\\data\\recognizers\\annProps.yml","..\\data\\recognizers\\nbcProps.yml");
+	std::vector<GestureRecognizer*> gameRecognizers = loadRecognizers("..\\data\\recognizers\\annRaw.yml", "..\\data\\recognizers\\annProps.yml", "..\\data\\recognizers\\nbcProps.yml");
+	std::vector<RPSGameAI*> gameAIs = loadGameAIs();
 	VideoDispatcher dispatcher ("Gesture detector", frameCaptureDelayMillis, gameDurationTimeSec, recognizers, gameRecognizers, gameAIs);
 
 	try {

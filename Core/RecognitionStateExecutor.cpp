@@ -24,9 +24,6 @@ void RecognitionStateExecutor::setRecognizer(GestureRecognizer* recognizer) {
 
 void RecognitionStateExecutor::initExecutor(cv::Mat& frame, std::vector<cv::Scalar>& skinColorRange) {
 	this->skinColorRange = skinColorRange;
-	cv::Mat frameCopy;
-	cv::cvtColor(frame, frameCopy, cv::COLOR_BGR2YCrCb);
-	this->colorMasker->setMaskBackground(frameCopy, skinColorRange);
 }
 
 cv::Mat RecognitionStateExecutor::maskFrame(cv::Mat& frame) {
@@ -81,4 +78,7 @@ cv::Scalar RecognitionStateExecutor::getGestureColor(Gesture gesture) {
 
 RecognitionStateExecutor::~RecognitionStateExecutor()
 {
+	delete colorMasker;
+	delete roiFinder;
+	delete recognizer;
 }

@@ -24,7 +24,7 @@ public:
 
 	void previousAI();
 
-	~GameStateExecutor();
+	virtual ~GameStateExecutor();
 private:
 
 	int timePassed();

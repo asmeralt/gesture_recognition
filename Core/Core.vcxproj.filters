@@ -108,6 +108,9 @@
     <ClCompile Include="HardRPSGameAI.cpp">
       <Filter>Source Files\Utils\AI</Filter>
     </ClCompile>
+    <ClCompile Include="StateExecutor.cpp">
+      <Filter>Source Files\StateMachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoDispatcher.h">

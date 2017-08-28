@@ -4,6 +4,7 @@
 class ClassFormatter
 {
 public:
+	ClassFormatter();
 	
 	virtual cv::Mat format(int classId) = 0;
 
@@ -12,6 +13,8 @@ public:
 	virtual int getRequiredColumns() = 0;
 
 	virtual int getRequiredType() = 0;
+
+	virtual ~ClassFormatter();
 
 };
 

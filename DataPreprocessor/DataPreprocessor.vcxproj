@@ -100,8 +100,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ANNTrainer.cpp" />
+    <ClCompile Include="ClassFormatter.cpp" />
     <ClCompile Include="ClassResponseTester.cpp" />
     <ClCompile Include="FeatureProps.cpp" />
+    <ClCompile Include="ImageFormatter.cpp" />
     <ClCompile Include="no_contours_exception.cpp" />
     <ClCompile Include="NumClassFormatter.cpp" />
     <ClCompile Include="PropsImageFormatter.cpp" />

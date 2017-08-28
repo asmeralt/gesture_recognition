@@ -34,6 +34,7 @@
     <ClCompile Include="SkinCalibratior.cpp" />
     <ClCompile Include="ColorMasker.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="StateExecutor.cpp" />
     <ClCompile Include="StatModelRecognizer.cpp" />
     <ClCompile Include="VideoDispatcher.cpp" />
   </ItemGroup>

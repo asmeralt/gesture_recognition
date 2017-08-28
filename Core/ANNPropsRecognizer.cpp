@@ -16,5 +16,4 @@ Gesture ANNPropsRecognizer::predictGesture(cv::Mat& image) {
 
 ANNPropsRecognizer::~ANNPropsRecognizer()
 {
-	GestureRecognizer::~GestureRecognizer();
 }

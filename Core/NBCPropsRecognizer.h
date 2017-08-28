@@ -11,6 +11,6 @@ public:
 
 	virtual Gesture predictGesture(cv::Mat& image);
 
-	~NBCPropsRecognizer();
+	virtual ~NBCPropsRecognizer();
 };
 

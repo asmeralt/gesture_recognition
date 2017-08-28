@@ -7,13 +7,13 @@ class StatModelRecognizer:
 	public Recognizer
 {
 protected:
-	cv::Ptr<cv::ml::StatModel>& model;
+	cv::Ptr<cv::ml::StatModel> model;
 
 public:
-	StatModelRecognizer(cv::Ptr<cv::ml::StatModel>& model);
+	StatModelRecognizer(cv::Ptr<cv::ml::StatModel> model);
 
 	virtual cv::Mat predict(cv::Mat& image);
 
-	~StatModelRecognizer();
+	virtual ~StatModelRecognizer();
 };
 

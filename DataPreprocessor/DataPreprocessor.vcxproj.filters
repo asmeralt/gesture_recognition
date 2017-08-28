@@ -134,5 +134,11 @@
     <ClCompile Include="no_contours_exception.cpp">
       <Filter>Source Files\FeatureAnalysis</Filter>
     </ClCompile>
+    <ClCompile Include="ClassFormatter.cpp">
+      <Filter>Source Files\Samples\Formatters</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageFormatter.cpp">
+      <Filter>Source Files\Samples\Formatters</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,6 +8,6 @@ public:
 
 	virtual cv::Rect findGestureRoi(cv::Mat& mask);
 
-	~GestureRoiFinder();
+	virtual ~GestureRoiFinder();
 };
 

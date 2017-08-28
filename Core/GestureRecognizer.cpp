@@ -32,5 +32,5 @@ Gesture GestureRecognizer::classNumToGesture(cv::Mat& prediction) {
 
 GestureRecognizer::~GestureRecognizer()
 {
-	StatModelRecognizer::~StatModelRecognizer();
+	delete formatter;
 }

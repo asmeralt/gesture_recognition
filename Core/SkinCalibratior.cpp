@@ -48,7 +48,7 @@ void SkinCalibrator::plotHistogram(cv::Mat& histogram, cv::Scalar color, float a
 	}
 }
 
-void SkinCalibrator::plotHistograms(std::vector<cv::Mat> histograms, std::vector<cv::Scalar> colors, float alphas[], cv::Mat& dst) {
+void SkinCalibrator::plotHistograms(std::vector<cv::Mat>& histograms, std::vector<cv::Scalar>& colors, float alphas[], cv::Mat& dst) {
 	for (int i = 0; i < histograms.size(); ++i) {
 		plotHistogram(histograms[i], colors[i], alphas[i], dst);
 	}

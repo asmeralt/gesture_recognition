@@ -16,5 +16,4 @@ Gesture ANNRawRecognizer::predictGesture(cv::Mat& image) {
 
 ANNRawRecognizer::~ANNRawRecognizer()
 {
-	GestureRecognizer::~GestureRecognizer();
 }

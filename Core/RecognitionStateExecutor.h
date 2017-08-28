@@ -21,7 +21,7 @@ public:
 
 	virtual void initExecutor(cv::Mat& frame, std::vector<cv::Scalar>& skinColorRange);
 
-	~RecognitionStateExecutor();
+	virtual ~RecognitionStateExecutor();
 protected:
 	cv::Mat maskFrame(cv::Mat& frame);
 
