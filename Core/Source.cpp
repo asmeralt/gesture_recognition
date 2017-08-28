@@ -12,7 +12,7 @@ const std::string windowName = "Gesture recognition";
 // Controls for a frame rate
 const int frameCaptureDelayMillis = 40;  // approx 25 frames per second
 
-std::vector<GestureRecognizer*> loadRecognizers(std::string annRawFile, std::string annPropsFile, std::string nbcPropsFile) {
+std::vector<GestureRecognizer*> loadRecognizers(char* annRawFile, char* annPropsFile, char* nbcPropsFile) {
 	std::vector<GestureRecognizer*> recognizers(3);
 	recognizers[0] = new ANNRawRecognizer(cv::ml::ANN_MLP::load(annRawFile), new RawImageFormatter(cv::Size(16, 16)));
 	recognizers[1] = new ANNPropsRecognizer(cv::ml::ANN_MLP::load(annPropsFile), new PropsImageFormatter());
