@@ -3,31 +3,21 @@
 #include <opencv2\highgui.hpp>
 #include <opencv2\videoio.hpp>
 #include <opencv2\imgproc.hpp>
-#include "EasyRPSGameAI.h"
-#include "MidRPSGameAI.h"
-#include "RandomRPSGameAI.h"
-#include "HardRPSGameAI.h"
 
 // public
-VideoDispatcher::VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, int gameDurationTimeSec, std::vector<GestureRecognizer*>& recognizers):
+VideoDispatcher::VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, int gameDurationTimeSec, std::vector<GestureRecognizer*>& recognizers, std::vector<GestureRecognizer*>& gameRecognizers, std::vector<RPSGameAI*> gameAIs):
 	windowName(windowName),
 	frameCaptureDelayMillis(frameCaptureDelayMillis),
 	state(VD_CALIBRATION),
-	recognizers(recognizers)
+	recognizers(recognizers),
+	gameRecognizers(gameRecognizers),
+	gameAIs(gameAIs)
 {
 	currentRecognizerIdx = 0;
+	currentGameRecognizerIdx = 0;
 	this->calibration = new CalibrationStateExecutor(new SkinCalibrator(), 0.3f);
 	this->recognition = new RecognitionStateExecutor(new ColorMasker(), new GestureRoiFinder(), this->recognizers[currentRecognizerIdx]);
-	std::vector<RPSGameAI*> gameAIs;
-	gameAIs.push_back(new EasyRPSGameAI());
-	gameAIs.push_back(new MidRPSGameAI());
-	gameAIs.push_back(new RandomRPSGameAI());
-	gameAIs.push_back(new HardRPSGameAI());
-	this->game = new GameStateExecutor(gameDurationTimeSec, new ColorMasker(), new GestureRoiFinder(), this->recognizers[currentRecognizerIdx], gameAIs);
-}
-
-VideoDispatcher::~VideoDispatcher()
-{
+	this->game = new GameStateExecutor(gameDurationTimeSec, new ColorMasker(), new GestureRoiFinder(), this->gameRecognizers[currentGameRecognizerIdx], gameAIs);
 }
 
 void VideoDispatcher::run() {
@@ -90,6 +80,16 @@ void VideoDispatcher::switchToGame(cv::Mat& frame, std::vector<cv::Scalar>& skin
 }
 
 void VideoDispatcher::switchToNextRecognizer() {
-	currentRecognizerIdx = (currentRecognizerIdx + 1) % this->recognizers.size();
-	recognition->setRecognizer(this->recognizers[currentRecognizerIdx]);
+	if (state = VD_RECOGNITION) {
+		currentRecognizerIdx = (currentRecognizerIdx + 1) % this->recognizers.size();
+		recognition->setRecognizer(this->recognizers[currentRecognizerIdx]);
+	}
+	else if (state = VD_GAME) {
+		currentGameRecognizerIdx = (currentGameRecognizerIdx + 1) % this->gameRecognizers.size();
+		game->setRecognizer(this->gameRecognizers[currentGameRecognizerIdx]);
+	}
+}
+
+VideoDispatcher::~VideoDispatcher()
+{
 }

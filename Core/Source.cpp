@@ -4,6 +4,10 @@
 #include "ANNRawRecognizer.h"
 #include "ANNPropsRecognizer.h"
 #include "NBCPropsRecognizer.h"
+#include "EasyRPSGameAI.h"
+#include "MidRPSGameAI.h"
+#include "RandomRPSGameAI.h"
+#include "HardRPSGameAI.h"
 
 // UI names consts
 const int gameDurationTimeSec = 3;
@@ -22,7 +26,15 @@ std::vector<GestureRecognizer*> loadRecognizers(char* annRawFile, char* annProps
 
 int main(int argc, char** argv) {
 	std::vector<GestureRecognizer*> recognizers = loadRecognizers("..\\data\\recognizers\\annRaw.yml","..\\data\\recognizers\\annProps.yml","..\\data\\recognizers\\nbcProps.yml");
-	VideoDispatcher dispatcher ("Gesture detector", frameCaptureDelayMillis, gameDurationTimeSec, recognizers);
+	std::vector<GestureRecognizer*> gameRecognizers = loadRecognizers("..\\data\\recognizers\\annRaw.yml", "..\\data\\recognizers\\annProps.yml", "..\\data\\recognizers\\nbcProps.yml");
+
+	std::vector<RPSGameAI*> gameAIs;
+	gameAIs.push_back(new EasyRPSGameAI());
+	gameAIs.push_back(new MidRPSGameAI());
+	gameAIs.push_back(new RandomRPSGameAI());
+	gameAIs.push_back(new HardRPSGameAI());
+
+	VideoDispatcher dispatcher ("Gesture detector", frameCaptureDelayMillis, gameDurationTimeSec, recognizers, gameRecognizers, gameAIs);
 
 	try {
 		dispatcher.run();

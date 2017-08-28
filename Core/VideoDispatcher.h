@@ -15,6 +15,7 @@ private:
 	std::string windowName;
 	int frameCaptureDelayMillis;
 	size_t currentRecognizerIdx;
+	size_t currentGameRecognizerIdx;
 
 	/* State machine */
 	VideoDispatcherState state;
@@ -23,10 +24,12 @@ private:
 	GameStateExecutor* game;
 
 	/* Recognizers */
-	std::vector<GestureRecognizer*> recognizers;
+	std::vector<GestureRecognizer*>& recognizers;
+	std::vector<GestureRecognizer*>& gameRecognizers;
+	std::vector<RPSGameAI*>& gameAIs;
 
 public:
-	VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, int gameDurationTimeSec, std::vector<GestureRecognizer*>& recognizers);
+	VideoDispatcher(std::string windowName, int frameCaptureDelayMillis, int gameDurationTimeSec, std::vector<GestureRecognizer*>& recognizers, std::vector<GestureRecognizer*>& gameRecognizers, std::vector<RPSGameAI*> gameAIs);
 
 	void run();
 
