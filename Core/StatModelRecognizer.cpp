@@ -1,6 +1,6 @@
 #include "StatModelRecognizer.h"
 
-StatModelRecognizer::StatModelRecognizer(cv::Ptr<cv::ml::StatModel> model): model(model)
+StatModelRecognizer::StatModelRecognizer(cv::Ptr<cv::ml::StatModel>& model): model(model)
 {
 }
 

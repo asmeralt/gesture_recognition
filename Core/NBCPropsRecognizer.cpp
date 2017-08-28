@@ -16,4 +16,5 @@ Gesture NBCPropsRecognizer::predictGesture(cv::Mat& image) {
 
 NBCPropsRecognizer::~NBCPropsRecognizer()
 {
+	GestureRecognizer::~GestureRecognizer();
 }
