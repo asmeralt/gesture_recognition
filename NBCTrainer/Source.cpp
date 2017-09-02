@@ -5,6 +5,7 @@
 #include "PropsImageFormatter.h"
 #include "NumResponseTester.h"
 #include "NumClassFormatter.h"
+#include "FeatureProps.h"
 
 #define SAMPLE_SIZE 16
 #define TEST_PRECISION 0.1
@@ -40,7 +41,10 @@ void setUpRawImageNBC(SampleFormatter*& formatter) {
 }
 
 void setUpSolidityPerimeterNBC(SampleFormatter*& formatter) {
-	formatter = new SampleFormatter(new PropsImageFormatter(), new NumClassFormatter(CV_32SC1));
+	std::vector<float(*)(std::vector<cv::Point>&)> props;
+	props.push_back(FeatureProps::calcSolidity);
+	props.push_back(FeatureProps::calcContourPerimeter);
+	formatter = new SampleFormatter(new PropsImageFormatter(FeatureProps::findMaxContour, props), new NumClassFormatter(CV_32SC1));
 }
 
 int main(int argc, char** argv) {

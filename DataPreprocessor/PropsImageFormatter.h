@@ -3,8 +3,12 @@
 class PropsImageFormatter :
 	public ImageFormatter
 {
+private:
+	std::vector<cv::Point>(*contourFinder)(cv::Mat&);
+
+	std::vector<float(*)(std::vector<cv::Point>&)> props;
 public:
-	PropsImageFormatter();
+	PropsImageFormatter(std::vector<cv::Point>(contourFinder)(cv::Mat&), std::vector<float(*)(std::vector<cv::Point>&)>& props);
 
 	virtual cv::Mat format(cv::Mat& image);
 

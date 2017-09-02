@@ -5,6 +5,7 @@
 #include "PropsImageFormatter.h"
 #include "ClassResponseTester.h"
 #include "VecClassFormatter.h"
+#include "FeatureProps.h"
 
 #define ANN_LAYERS 3
 #define RAW_ANN_HIDDEN_LAYER_NEURONS 20
@@ -50,7 +51,10 @@ void setUpRawImageANN(int maxClassId, SampleFormatter*& formatter, int*& neurons
 }
 
 void setUpSolidityPerimeterANN(int maxClassId, SampleFormatter*& formatter, int*& neurons) {
-	formatter = new SampleFormatter(new PropsImageFormatter(), new VecClassFormatter(maxClassId));
+	std::vector<float(*)(std::vector<cv::Point>&)> props;
+	props.push_back(FeatureProps::calcSolidity);
+	props.push_back(FeatureProps::calcContourPerimeter);
+	formatter = new SampleFormatter(new PropsImageFormatter(FeatureProps::findMaxContour, props), new VecClassFormatter(maxClassId));
 	neurons = new int[3];
 	neurons[0] = 2;
 	neurons[1] = PROPS_ANN_HIDDEN_LAYER_NEURONS;
